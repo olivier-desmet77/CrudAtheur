@@ -4,7 +4,10 @@ namespace App\Form;
 
 use App\Entity\Author;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,19 +16,23 @@ class AuthorType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title', TextType::class,[
-                'label' => "Nom de l'auteur",
+            ->add('title', TextType::class, [
+                'label' => 'Titre de l\'auteur :',
             ])
-            ->add('description', TextareaType::class,[
-                'label' => 'Description',
+            ->add('description', TextareaType::class, [
+                'label' => 'Description de l\'auteur :',
             ])
-            ->add('nationality', TextType::class,[
-                'label' => 'Nationnalite',
+            ->add('nationality', ChoiceType::class, [
+                'label' => 'Nationalité de l\'auteur :',
+                'choices' => [
+                    'Francais' => 'fr',
+                    'Anglais' => 'en',
+                    'Espagnol' => 'es',
+                    'Allemand' => 'de',
+                ],
             ])
-            // ->add('createAt')
-            // ->add('updatedAt')
-            ->add('submit', SubmitType::class,[
-                'label' => 'Envoyer'
+            ->add('submit', SubmitType::class, [
+                'label' => 'Envoyer',
             ]);
     }
 
@@ -33,7 +40,6 @@ class AuthorType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Author::class,
-            'method' => 'POST'
         ]);
     }
 }

@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\AuthorRepository;
+use App\Repository\BookRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: AuthorRepository::class)]
-class Author
+#[ORM\Entity(repositoryClass: BookRepository::class)]
+class Book
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -21,13 +21,16 @@ class Author
     private ?string $description = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $nationality = null;
+    private ?string $genre = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $updatedAt = null;
+
+    #[ORM\Column]
+    private ?float $price = null;
 
     public function getId(): ?int
     {
@@ -58,14 +61,14 @@ class Author
         return $this;
     }
 
-    public function getNationality(): ?string
+    public function getGenre(): ?string
     {
-        return $this->nationality;
+        return $this->genre;
     }
 
-    public function setNationality(?string $nationality): self
+    public function setGenre(?string $genre): self
     {
-        $this->nationality = $nationality;
+        $this->genre = $genre;
 
         return $this;
     }
@@ -90,6 +93,18 @@ class Author
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getPrice(): ?float
+    {
+        return $this->price;
+    }
+
+    public function setPrice(float $price): self
+    {
+        $this->price = $price;
 
         return $this;
     }
