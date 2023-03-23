@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin Book - Liste des autheurs
+{% endblock %}
+
+{% block body %}
+
+	<h1>Liste des auteurs</h1>
+
+	<p>
+		<a href="{{ path('app_admin_author_create') }}">Créer un autheur</a>
+	</p>
+
+	<ul>
+		{% for author in authors %}
+			<li>
+				{{author.title}}
+				(#{{author.id}})
+				<a href="{{ path('app_admin_author_update', {id: author.id}) }}">Modifier</a>
+				<a href="{{ path('app_admin_author_remove', {id: author.id}) }}">Supprimer</a>
+			</li>
+		{% endfor %}
+	</ul>
+
+{% endblock %}
